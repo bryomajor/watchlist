@@ -7,4 +7,15 @@ def index():
     '''
     View root page function that returns the index page and it's data
     '''
-    return render_template('index.html')
+    title = 'Home - Welcome to the best Movie Review Website Online'
+    return render_template('index.html', title = title)
+
+
+
+@app.route('/movie/<movie_id>')
+def movie(movie_id):
+    '''
+    View movie page function that returns the movie details page and its data
+    '''
+    title = f'Movies {movie_id}'
+    return render_template('movie.html', id = movie_id, title = title)
