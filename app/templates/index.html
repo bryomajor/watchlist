@@ -1,16 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    {% if title %}
-    <title> {{ title }} </title>
-    {% else %}
-    <title> Welcome to the best Movie Review Website </title>
-    {% endif %}
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+<!-- Styles block -->
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+{% endblock %}
+
+<!-- Content block -->
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <form>
+            <input type="text" name="movie_query" placeholder="Search for a Movie" class="form-control">
+            <input type="submit" value="Submit" class="btn btn-default">
+        </form>
+
+    </div>
+
+    <div class="row">
+        <!-- Popular Movies Section -->
+        <h3 class="text-center">Popular Movies</h3>
+        <ul style="list-style: none;">
+            {{ macro.displayMovieList(popular) }}
+        </ul>
+    </div>
+    <div class="row">
+        <!-- Upcoming Movies -->
+        <h3 class="text-center">Upcoming Movies</h3>
+        <ul style="list-style: none;">
+            {{ macro.displayMovieList(upcoming) }}
+        </ul>
+
+    </div>
+    <div class="row">
+        <!-- Now Showing Movie -->
+        <h3 class="text-center">Now Showing</h3>
+        <ul style="list-style: none;">
+            {{ macro.displayMovieList(now_showing) }}
+        </ul>
+
+    </div>
+</div>
+
+{% endblock%}
