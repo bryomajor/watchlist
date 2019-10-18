@@ -9,17 +9,20 @@ api_key = None
 # Getting the movie base url
 base_url = None
 
+secret_key = None
+
 def configure_request(app):
-    global api_key,base_url
+    global api_key, base_url, secret_key
     api_key = app.config['MOVIE_API_KEY']
     base_url = app.config['MOVIE_API_BASE_URL']
+    secret_key = app.config['SECRET_KEY']
 
 
 def get_movies(category):
     '''
     Function that gets the json response to our url
     '''
-    get_movies_url = base_url.format(category, api_key)
+    get_movies_url = 'https://api.themoviedb.org/3/movie/{}?api_key={}'.format(category, api_key)
 
     # with urllib.request.urlopen(get_movies_url) as url:
     #     get_movies_data = url.read()
